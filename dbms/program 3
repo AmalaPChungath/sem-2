@@ -1,0 +1,229 @@
+SQL> create table customer(id number(3),name varchar(20),city varchar (20),country varchar(20),age number(3),salary number(8));
+
+Table created.
+
+SQL> desc customer
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID						    NUMBER(3)
+ NAME						    VARCHAR2(20)
+ CITY						    VARCHAR2(20)
+ COUNTRY					    VARCHAR2(20)
+ AGE						    NUMBER(3)
+ SALARY 					    NUMBER(8)
+
+SQL> insert into employee values(&id,'&name','&city','&country',&age,&salary);
+Enter value for id: 1
+Enter value for name: Amala
+Enter value for city: Thrissur
+Enter value for country: India
+Enter value for age: 20
+Enter value for salary: 50000 
+old   1: insert into employee values(&id,'&name','&city','&country',&age,&salary)
+new   1: insert into employee values(1,'Amala','Thrissur','India',20,50000)
+insert into employee values(1,'Amala','Thrissur','India',20,50000)
+                                                            *
+ERROR at line 1:
+ORA-00932: inconsistent datatypes: expected DATE got NUMBER
+
+
+SQL> insert into customer values(&id,'&name','&city','&country',&age,&salary);
+Enter value for id: 1
+Enter value for name: Amala
+Enter value for city: Thrissur
+Enter value for country: India
+Enter value for age: 20
+Enter value for salary: 50000
+old   1: insert into customer values(&id,'&name','&city','&country',&age,&salary)
+new   1: insert into customer values(1,'Amala','Thrissur','India',20,50000)
+
+1 row created.
+
+SQL> /
+Enter value for id: 2
+Enter value for name: Amruta
+Enter value for city: Ernakulam
+Enter value for country: London
+Enter value for age: 21
+Enter value for salary: 50000
+old   1: insert into customer values(&id,'&name','&city','&country',&age,&salary)
+new   1: insert into customer values(2,'Amruta','Ernakulam','London',21,50000)
+
+1 row created.
+
+SQL> /
+Enter value for id: 3
+Enter value for name: Anjali
+Enter value for city: Ernakulam
+Enter value for country: United Kingdom
+Enter value for age: 21
+Enter value for salary: 30000
+old   1: insert into customer values(&id,'&name','&city','&country',&age,&salary)
+new   1: insert into customer values(3,'Anjali','Ernakulam','United Kingdom',21,30000)
+
+1 row created.
+
+SQL> /
+Enter value for id: 4
+Enter value for name: kavya
+Enter value for city: Alapuzha
+Enter value for country: Saudi arabia
+Enter value for age: 23
+Enter value for salary: 45000 
+old   1: insert into customer values(&id,'&name','&city','&country',&age,&salary)
+new   1: insert into customer values(4,'kavya','Alapuzha','Saudi arabia',23,45000)
+
+1 row created.
+
+SQL> select * from customer;
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 1 Amala		Thrissur	     India
+	20	50000
+
+	 2 Amruta		Ernakulam	     London
+	21	50000
+
+	 3 Anjali		Ernakulam	     United Kingdom
+	21	30000
+
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 4 kavya		Alapuzha	     Saudi arabia
+	23	45000
+
+
+SQL> select * from customer where name like 'k%';
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 4 kavya		Alapuzha	     Saudi arabia
+	23	45000
+
+
+SQL> select * from customer where name like '%ma%';
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 1 Amala		Thrissur	     India
+	20	50000
+
+
+SQL> select * from customer where city like '&a';
+Enter value for a: ^C
+
+SQL> select * from customer where city like '%a';
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 4 kavya		Alapuzha	     Saudi arabia
+	23	45000
+
+
+SQL> select * from customer where age like '2%';
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 1 Amala		Thrissur	     India
+	20	50000
+
+	 2 Amruta		Ernakulam	     London
+	21	50000
+
+	 3 Anjali		Ernakulam	     United Kingdom
+	21	30000
+
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 4 kavya		Alapuzha	     Saudi arabia
+	23	45000
+
+
+SQL> select * from customer where salary like '%50%';
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 1 Amala		Thrissur	     India
+	20	50000
+
+	 2 Amruta		Ernakulam	     London
+	21	50000
+
+	 4 kavya		Alapuzha	     Saudi arabia
+	23	45000
+
+
+SQL> select * from customer where country like 'In_ia';
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 1 Amala		Thrissur	     India
+	20	50000
+
+
+SQL> select * from customer where salary like '3__00';
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 3 Anjali		Ernakulam	     United Kingdom
+	21	30000
+
+
+SQL> select * from customer where name like '____a%';
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 1 Amala		Thrissur	     India
+	20	50000
+
+	 4 kavya		Alapuzha	     Saudi arabia
+	23	45000
+
+SQL> select * from customer where name not like 'priya';
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 1 Amala		Thrissur	     India
+	20	50000
+
+	 2 Amruta		Ernakulam	     London
+	21	50000
+
+	 3 Anjali		Ernakulam	     United Kingdom
+	21	30000
+
+
+	ID NAME 		CITY		     COUNTRY
+---------- -------------------- -------------------- --------------------
+       AGE     SALARY
+---------- ----------
+	 4 kavya		Alapuzha	     Saudi arabia
+	23	45000
+
