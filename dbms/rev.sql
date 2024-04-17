@@ -14,4 +14,15 @@ declare
     dbms_output.put_line('reversed string :  '||rev);
   end;
 /   
+
+
+/*SQL> @rev
+Enter value for string: amala
+old   3:   str varchar(10):='&string';
+new   3:   str varchar(10):='amala';
+original stringamala
+reversed stringamala
+
+PL/SQL procedure successfully completed.
+*/
     
