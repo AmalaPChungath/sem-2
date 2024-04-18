@@ -26,3 +26,28 @@ class strman
 			System.out.println(s[i]);
 	}
 }
+
+
+
+
+/*
+concatinated string 
+  Hello,World!  
+java
+substring from 8
+World!  
+starting index of world : 8
+relpaced string is
+  Hello,India!  
+not equal
+trim white space of string
+Hello,World!
+uppercase :   HELLO,WORLD!  
+lowercase :   hello,world!  
+length of string : 16
+character at 8 : W
+splited words are 
+
+Hello
+World!
+*/
