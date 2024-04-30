@@ -1,0 +1,80 @@
+class person
+{
+    String name;
+    String gender;
+    String address;
+    int age;
+    person(String name,String gender,String address,int age)
+    {
+        this.name=name;
+        this.gender=gender;
+        this.address=address;
+        this.age=age;
+    }
+    void print()
+    {
+        System.out.println("name : "+name);
+        System.out.println("gender : "+gender);
+        System.out.println("address : "+address);
+        System.out.println("age : "+age);
+    }
+}
+class employee extends person
+{
+    int empid;
+    String cname;
+    String qual;
+    float salary;
+    employee(String name,String gender,String address,int age,int empid,String cname,String qual,float salary)
+    {
+        super(name,gender,address,age);
+        this.empid=empid;
+        this.cname=cname;
+        this.qual=qual;
+        this.salary=salary;
+    }
+    void printe()
+    {
+        print();
+        System.out.println("empid : "+empid);
+        System.out.println("cname : "+cname);
+        System.out.println("qual : "+qual);
+        System.out.println("salary : "+salary);
+    }
+}
+class teacher extends employee
+{
+    String sub;
+    String dept;
+    int tid;
+    teacher(String name,String gender,String address,int age,int empid,String cname,String qual,float salary,String sub,String dept,int tid)
+    {
+        super(name,gender,address,age,empid,cname,qual,salary);
+        this.sub=sub;
+        this.dept=dept;
+        this.tid=tid;
+    }
+    void printt()
+    {
+        printe();
+        System.out.println("sub : "+sub);
+        System.out.println("dept : "+dept);
+        System.out.println("tid : "+tid);
+    }
+}
+public class inher
+{
+    public static void main(String args[])
+    {
+        teacher[] arr=new teacher[5];
+        for(int i=0;i<5;i++)
+        {
+            arr[i] =new teacher("sonia","f","ktmglm",45,456,"mace","mca",80000,"cn","mca",123);
+        }
+        for(int i=0;i<5;i++)
+        {
+            arr[i].printt();
+            System.out.println();
+        }
+    }
+}
