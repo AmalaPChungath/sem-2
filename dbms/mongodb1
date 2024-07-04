@@ -1,0 +1,165 @@
+> use employee
+
+> db
+employee
+
+> db.createCollection("empdetails")
+{ "ok" : 1 }
+
+db.empdetails.insertMany([{"empid":101,"empname":"Ram","salary":15000,"designation":"clerk"},{"empid":102,"empname":"Shyam","salary":20000,"designation":"administrator"},{"empid":103,"empname":"Hari","salary":10000,"designation":"supervisor"},{"empid":104,"empname":"Sita","salary":15000,"designation":"clerk"},{"empid":105,"empname":"Rose","salary":20000,"designation":"administrator"},{"empid":106,"empname":"Maria","salary":25000,"designation":"manager"}])
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("66865ac4b44614097f524d67"),
+		ObjectId("66865ac4b44614097f524d68"),
+		ObjectId("66865ac4b44614097f524d69"),
+		ObjectId("66865ac4b44614097f524d6a"),
+		ObjectId("66865ac4b44614097f524d6b"),
+		ObjectId("66865ac4b44614097f524d6c")
+	]
+}
+
+> db.empdetails.find().pretty()
+{
+	"_id" : ObjectId("66865ac4b44614097f524d67"),
+	"empid" : 101,
+	"empname" : "Ram",
+	"salary" : 15000,
+	"designation" : "clerk"
+}
+{
+	"_id" : ObjectId("66865ac4b44614097f524d68"),
+	"empid" : 102,
+	"empname" : "Shyam",
+	"salary" : 20000,
+	"designation" : "administrator"
+}
+{
+	"_id" : ObjectId("66865ac4b44614097f524d69"),
+	"empid" : 103,
+	"empname" : "Hari",
+	"salary" : 10000,
+	"designation" : "supervisor"
+}
+{
+	"_id" : ObjectId("66865ac4b44614097f524d6a"),
+	"empid" : 104,
+	"empname" : "Sita",
+	"salary" : 15000,
+	"designation" : "clerk"
+}
+{
+	"_id" : ObjectId("66865ac4b44614097f524d6b"),
+	"empid" : 105,
+	"empname" : "Rose",
+	"salary" : 20000,
+	"designation" : "administrator"
+}
+{
+	"_id" : ObjectId("66865ac4b44614097f524d6c"),
+	"empid" : 106,
+	"empname" : "Maria",
+	"salary" : 25000,
+	"designation" : "manager"
+}
+
+
+> db.empdetails.find({"empname":/^S/}).pretty()
+{
+	"_id" : ObjectId("66865ac4b44614097f524d68"),
+	"empid" : 102,
+	"empname" : "Shyam",
+	"salary" : 20000,
+	"designation" : "administrator"
+}
+{
+	"_id" : ObjectId("66865ac4b44614097f524d6a"),
+	"empid" : 104,
+	"empname" : "Sita",
+	"salary" : 15000,
+	"designation" : "clerk"
+}
+
+> db.empdetails.update({"empname":"Sita"},{$inc:{"salary":1000}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.empdetails.find({"empname":"Sita"}).pretty()
+{
+	"_id" : ObjectId("66865ac4b44614097f524d6a"),
+	"empid" : 104,
+	"empname" : "Sita",
+	"salary" : 16000,
+	"designation" : "clerk"
+}
+
+
+> db.empdetails.updateMany({},{$set:{"DOJ":11-06-2022}})
+{ "acknowledged" : true, "matchedCount" : 6, "modifiedCount" : 6 }
+> db.empdetails.find().pretty()
+{
+	"_id" : ObjectId("66865ac4b44614097f524d67"),
+	"empid" : 101,
+	"empname" : "Ram",
+	"salary" : 15000,
+	"designation" : "clerk",
+	"DOJ" : -2017
+}
+{
+	"_id" : ObjectId("66865ac4b44614097f524d68"),
+	"empid" : 102,
+	"empname" : "Shyam",
+	"salary" : 20000,
+	"designation" : "administrator",
+	"DOJ" : -2017
+}
+{
+	"_id" : ObjectId("66865ac4b44614097f524d69"),
+	"empid" : 103,
+	"empname" : "Hari",
+	"salary" : 10000,
+	"designation" : "supervisor",
+	"DOJ" : -2017
+}
+{
+	"_id" : ObjectId("66865ac4b44614097f524d6a"),
+	"empid" : 104,
+	"empname" : "Sita",
+	"salary" : 16000,
+	"designation" : "clerk",
+	"DOJ" : -2017
+}
+{
+	"_id" : ObjectId("66865ac4b44614097f524d6b"),
+	"empid" : 105,
+	"empname" : "Rose",
+	"salary" : 20000,
+	"designation" : "administrator",
+	"DOJ" : -2017
+}
+{
+	"_id" : ObjectId("66865ac4b44614097f524d6c"),
+	"empid" : 106,
+	"empname" : "Maria",
+	"salary" : 25000,
+	"designation" : "manager",
+	"DOJ" : -2017
+}
+
+
+> db.empdetails.aggregate([{$match:{"designation":"clerk"}},{$group:{"_id":null,"total_salary":{$sum:"$salary"}}}])
+{ "_id" : null, "total_salary" : 31000 }
+
+
+> db.empdetails.deleteOne({"empid":106})
+{ "acknowledged" : true, "deletedCount" : 1 }
+
+> db.createUser({user:"Mohan",pwd:"password",roles:[{role:"readWrite",db:"employee"}]})
+Successfully added user: {
+	"user" : "Mohan",
+	"roles" : [
+		{
+			"role" : "readWrite",
+			"db" : "employee"
+		}
+	]
+}
+
