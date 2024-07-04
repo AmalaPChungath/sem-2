@@ -6,7 +6,7 @@ public class awtcalculator extends Frame implements ActionListener
 	Label l1,l2,l3;
 	Button b1,b2,b3,b4;
 	
-	awtframe()
+	awtcalculator()
 	{
 		setLayout(new FlowLayout());
 		t1=new TextField(10);
