@@ -93,4 +93,4 @@ public class awtcalculator extends Frame implements ActionListener
 		}});
 	}//main method
 
-}//awtframe
+}//awtcalculator
